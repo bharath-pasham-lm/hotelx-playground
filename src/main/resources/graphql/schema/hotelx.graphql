@@ -1,5 +1,5 @@
 schema {
-    query: HotelXQuery
+    query: QueryRoot
 }
 input HotelCriteriaSearchInput {
     checkIn: Date!
@@ -482,6 +482,10 @@ type HotelXQuery{
         filter: FilterInput,
         filterSearch: HotelXFilterSearchInput,
     ): HotelSearch
+}
+
+type QueryRoot {
+    hotelX : HotelXQuery
 }
 
 scalar Date
