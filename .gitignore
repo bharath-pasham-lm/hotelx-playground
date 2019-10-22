@@ -2,3 +2,4 @@
 /.idea/
 *.iml
 .java-version
+.DS_Store
