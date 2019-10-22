@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.bharath</groupId>
+  <artifactId>hotelx-playground</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+    <properties>
+      <maven.compiler.target>11</maven.compiler.target>
+      <maven.compiler.source>11</maven.compiler.source>
+      <manifold.version>2019.1.22</manifold.version>
+    </properties>
+
+
+  <dependencies>
+    <!-- Manifold : GraphQL -->
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-graphql</artifactId>
+      <version>${manifold.version}</version>
+    </dependency>
+
+    <!-- Manifold : [Un]checked -->
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-exceptions</artifactId>
+      <version>${manifold.version}</version>
+    </dependency>
+
+    <!-- Manifold : Collections -->
+    <dependency>
+      <groupId>systems.manifold</groupId>
+      <artifactId>manifold-collections</artifactId>
+      <version>${manifold.version}</version>
+    </dependency>
+
+    <!--SparkJava -->
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.13</version>
+    </dependency>
+
+    <!--Testing-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+<!--      <plugin>-->
+<!--        <groupId>io.github.kobylynskyi</groupId>-->
+<!--        <artifactId>graphql-codegen-maven-plugin</artifactId>-->
+<!--        <version>1.2.3</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <graphqlSchemaPaths>${project.basedir}/src/main/resources/graphql/queries.graphql</graphqlSchemaPaths>-->
+<!--              <outputDir>${project.build.directory}/generated-sources/graphql</outputDir>-->
+<!--              <packageName>com.bharath.playground.hotelx.model</packageName>-->
+<!--              <customTypesMapping>-->
+<!--                <DateTime>java.util.Date</DateTime>-->
+<!--                <Price.amount>java.math.BigDecimal</Price.amount>-->
+<!--              </customTypesMapping>-->
+<!--              <customAnnotationsMapping>-->
+<!--                <EpochMillis>com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.example.json.EpochMillisScalarDeserializer.class</EpochMillis>-->
+<!--              </customAnnotationsMapping>-->
+<!--              <modelNameSuffix>TO</modelNameSuffix>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+          <encoding>UTF-8</encoding>
+          <compilerArgs>
+            <!-- Configure manifold plugin -->
+            <arg>-Xplugin:Manifold</arg>
+          </compilerArgs>
+          <!-- Add the processor path for the plugin (required for Java 9+ -->
+          <annotationProcessorPaths>
+            <path>
+              <groupId>systems.manifold</groupId>
+              <artifactId>manifold-graphql</artifactId>
+              <version>${manifold.version}</version>
+            </path>
+            <path>
+              <groupId>systems.manifold</groupId>
+              <artifactId>manifold-exceptions</artifactId>
+              <version>${manifold.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
